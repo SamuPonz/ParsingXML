@@ -2,7 +2,12 @@
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
+		GestoreFile trip = new GestoreFile("trips.txt");
+		
+		
+		
+		System.out.println("fatto");
+		
 	}
 }
