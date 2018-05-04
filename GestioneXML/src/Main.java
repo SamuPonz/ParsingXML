@@ -7,7 +7,7 @@ public class Main {
 		
 		System.out.println(fileManager.getFiles() + "\n");
 		
-		fileManager.read("trips.txt");
+		fileManager.read("agency.txt");
 		
 		
 

@@ -49,7 +49,8 @@ public class FileManager {
 	Element root = null;
 	Element row = null;
 	Element genericItem = null;
-		
+    Attribute attribute = null;	
+	
 	String fileName = "";
 	
 	for(String file : files) {
@@ -70,22 +71,36 @@ public class FileManager {
 		            	System.out.println("Start Read Doc " + fileName);
 		            	break;
 		            case XMLStreamConstants.START_ELEMENT:	            	
-		            	String startTag = xmlr.getLocalName();            	
+		            	String startTag = xmlr.getLocalName();
 		            	if(setup) {
-		            			root = new Element(startTag);
-		            			setup = false;
+		            		root = new Element(startTag);
+		            		for(int i = 0; i < xmlr.getAttributeCount(); i++) {
+		            			attribute = new Attribute(xmlr.getAttributeLocalName(i));
+				            	root.getAttributes().add(attribute);
+				            	root.getAttributes().get(i).setValue(xmlr.getAttributeValue(i));
+				            }
+		            		setup = false;	
 		            		}
 		            	else {
 			            	if(startTag.equals(ROW)) {
-			            		row = new Element(startTag);			            		
-//root è un Element che contiene un array di SimpleElements, che però possono essere a loro volta elements!!!        		
-			            		root.subElements.add(row);
+			            		row = new Element(startTag);
+			            		for(int i = 0; i < xmlr.getAttributeCount(); i++) {
+			            			attribute = new Attribute(xmlr.getAttributeLocalName(i));
+					            	row.getAttributes().add(attribute);
+					            	row.getAttributes().get(i).setValue(xmlr.getAttributeValue(i));
+			            		}       		
+			            		root.getSubElements().add(row);
 			            		imAtRow = true;
 			            	}
 			            	else {
 			            		imAtRow = false;
 			            		genericItem = new Element(startTag);
-			            		row.subElements.add(genericItem);
+			            		for(int i = 0; i < xmlr.getAttributeCount(); i++) {
+			            			attribute = new Attribute(xmlr.getAttributeLocalName(i));
+					            	genericItem.getAttributes().add(attribute);
+					            	genericItem.getAttributes().get(i).setValue(xmlr.getAttributeValue(i));
+			            		}
+			            		row.getSubElements().add(genericItem);
 			            	}
 		            	}
 		            	break;
@@ -126,16 +141,24 @@ public class FileManager {
 		    }
 	}
 	
+
+//stampa una bozza dei contenuti delle liste chiedendo come paramento la root
 	public void printOnConsole(Element root) {
 		
 		System.out.println("\n\n---------XML---------");
-    	System.out.println("|\n" + " ->" + root.getName() + ": " + root.getCharacter());
-    	for(Element _row : root.subElements) {
-    		System.out.println(" |\n" + "  ->" + _row.getName() + ": " + _row.getCharacter() + "\n  |");
-    		for (Element _genericItem : _row.subElements) {
-    			System.out.println("   ->" + _genericItem.getName() +  ": " + _genericItem.getCharacter());
+    	System.out.println("<" + root.getName() + ">");
+    	for(Element _row : root.getSubElements()) {
+    		System.out.print("        <" + _row.getName());
+    		for(Attribute att : _row.getAttributes()) {
+    			System.out.print(" " + att.getName() + "=" + "\"" + att.getValue() + "\"");
     		}
+    		System.out.println(">");
+    		for (Element _genericItem : _row.getSubElements()) {
+    			System.out.println("                <" + _genericItem.getName() + ">" + _genericItem.getCharacter() + "</" + _genericItem.getName() + ">");
+    		}
+    		System.out.println("        </" + _row.getName() + ">");
     	}
+    	System.out.println("</" + root.getName() + ">");
 	}
 	
 	public void write() {}
