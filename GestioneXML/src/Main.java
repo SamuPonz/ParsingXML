@@ -3,11 +3,14 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		FileManager fileManager = new FileManager();
+	
+		Reader lettore = new Reader();
 		
-		System.out.println(fileManager.getFiles() + "\n");
+		Element agency = lettore.read("agency.txt");
+		Element trips = lettore.read("trips.txt");
 		
-		fileManager.read("agency.txt");
+		trips.printOnConsole();
+		agency.printOnConsole();
 		
 		
 

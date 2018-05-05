@@ -44,6 +44,31 @@ public class Element{
 		this.attributes = attributes;
 	}
 	
+	public void printOnConsole() {
+		
+		System.out.println("\n\n----------------------XML---------------------------");
+    	System.out.print("<" + name);
+    	for(Attribute att : attributes ) {
+			System.out.print(" " + att.getName() + "=" + "\"" + att.getValue() + "\"");
+		}
+		System.out.println(">");
+    	for(Element _row : subElements) {
+    		System.out.print("\t<" + _row.getName());
+    		for(Attribute att : _row.getAttributes()) {
+    			System.out.print(" " + att.getName() + "=" + "\"" + att.getValue() + "\"");
+    		}
+    		System.out.println(">");
+    		for (Element _genericItem : _row.getSubElements()) {
+    			System.out.print("\t\t<" + _genericItem.getName());
+    			for(Attribute att : _genericItem.getAttributes()) {
+        			System.out.print(" " + att.getName() + "=" + "\"" + att.getValue() + "\"");
+        		}
+        		System.out.println(">" + _genericItem.getCharacter() + "</" + _genericItem.getName() + ">");
+    		}
+    		System.out.println("\t</" + _row.getName() + ">");
+    	}
+    	System.out.println("</" + name + ">");
+	}
 	
 
 }
