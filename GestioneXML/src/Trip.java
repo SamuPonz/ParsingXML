@@ -5,16 +5,19 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Trip {
-    private static final String[] tags= {"route_id", "service_id", "trip_id", "trip_short_name"};
+public class Trip extends FileXML {
 
     private List<String> route_id = new ArrayList<>();
     private List<String> service_id = new ArrayList<>();
     private List<String> trip_id = new ArrayList<>();
     private List<String> trip_short_name = new ArrayList<>();
 
-
-    public Trip(String fileName){
+    public Trip(String fileName) {
+        super(fileName, "route_id", "service_id", "trip_id", "trip_short_name");
+        init();
+    }
+    //LEGGE DAL FILE SOLO I TAG CHE CI INTERESSANO E SALVA I VALORI
+    public void init(){
         int aggiungo = 0;
 
         try {
@@ -26,13 +29,13 @@ public class Trip {
                         break;
                     case XMLStreamConstants.START_ELEMENT:
                         String startTag = xmlr.getLocalName();
-                            if (startTag.equals(tags[0]))
-                                aggiungo = 1;
-                            if (startTag.equals(tags[1]))
-                                aggiungo = 2;
-                            if (startTag.equals(tags[2]))
-                                aggiungo = 3;
-                            if (startTag.equals(tags[3]))
+                        if (startTag.equals(tags.get(0)))
+                            aggiungo = 1;
+                        if (startTag.equals(tags.get(1)))
+                            aggiungo = 2;
+                        if (startTag.equals(tags.get(2)))
+                            aggiungo = 3;
+                        if (startTag.equals(tags.get(3)))
                                 aggiungo = 4;
                         break;
                     case XMLStreamConstants.CHARACTERS:
