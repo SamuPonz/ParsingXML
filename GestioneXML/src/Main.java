@@ -3,17 +3,13 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-	
-		Reader lettore = new Reader();
-		
-		Element agency = lettore.read("agency.txt");
-		Element trips = lettore.read("trips.txt");
-		
-		trips.printOnConsole();
-		agency.printOnConsole();
-		
-		
-
+	Trip viaggio = new Trip("trips.txt");
+	Route tratta = new Route("routes.txt");
+	Writer creaFile = new Writer();
+	StopTimes fermate = new StopTimes("stop_times.txt");
+	viaggio.printer();
+	tratta.printer();
+	fermate.printer();
+	creaFile.write("Output.xml",viaggio,tratta,fermate);
 	}
-
 }
