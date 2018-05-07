@@ -72,12 +72,7 @@ public class Trip extends FileXML {
             System.err.println(e.getMessage());
         }
     }
-    public void printer(){
-        System.out.println(route_id);
-        System.out.println(trip_id);
-        System.out.println(service_id);
-        System.out.println(trip_short_name);
-    }
+
 
     public List<String> getRoute_id() {
         return route_id;

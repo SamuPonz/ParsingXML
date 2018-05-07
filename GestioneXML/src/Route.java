@@ -85,6 +85,7 @@ public class Route extends FileXML{
         return route_short_name;
     }
 
+//PASSANDO COME ARGOMENTO UN route_id RITORNA L'INDICE A CUI SI TROVA NEL FILE Route
     public int trovaRouteid(String id) {
         for (int i = 0; i < route_id.size(); i++) {
             if(id.equals(route_id.get(i)))

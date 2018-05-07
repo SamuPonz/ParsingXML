@@ -109,6 +109,7 @@ public class StopTimes extends FileXML {
         return stop_sequence;
     }
 
+//PASSANDO COME ARGOMENTO UN trip_id RITORNA L'INDICE A CUI SI TROVA NEL FILE StopsTimes
     public int trovaTripid(String id) {
         for (int i = 0; i < trip_id.size(); i++) {
             if (id.equals(trip_id.get(i)))
