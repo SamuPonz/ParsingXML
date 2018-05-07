@@ -1,5 +1,4 @@
 # ParsingXML :memo:
-*Il programma effettua una lettura di alcuni file in formato XML, ne estrae determinate informazioni e produce nuovi file XML organizzando le informazioni secondo la consegna data.* 
 
 **N.B.** .
 
